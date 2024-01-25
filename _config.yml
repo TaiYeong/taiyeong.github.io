@@ -9,8 +9,8 @@ description: >
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://github.com/TaiYeong'
-baseurl:          '/jekyll-gitbook'
+url:              'https://github.com/TaiYeong/jekyll-gitbook'
+baseurl:          ''
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
