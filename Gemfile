@@ -18,4 +18,5 @@ gem "rackup"
 gem 'rack-handlers', '~> 0.7.1'
 gem 'rack-handler-apache', '~> 0.0.2'
 gem 'sinatra', '~> 1.4', '>= 1.4.7'
+gem 'to_api', '~> 1.3'
 gem 'jekyll-admin', group: :jekyll_plugins
