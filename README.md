@@ -22,8 +22,8 @@ Make Jelly site have a GitBook look!
 
 ## Purpose
 
-- [USD]()
-- [Git]()
+- [USD](https://taiyeong.github.io/pipeline/2024-01-26-git.html)
+- [Git](https://taiyeong.github.io/pipeline/2024-01-26-usd.html)
 - [Build Jekyll blog]()
 - [pyenv]()
 - [Rocky Linux setup]()
