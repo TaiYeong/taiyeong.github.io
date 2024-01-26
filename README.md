@@ -20,6 +20,11 @@ Make Jelly site have a GitBook look!
 1. Not summary, Write useful contents!
 2. With tool, Add post / Check in localhost / Publish ( git push )
 
+## Tip : rule
+- ## : main title
+- ### : sub title
+- more than four sharp : Could not appear on menu tree
+
 ## Purpose
 
 - [USD](https://taiyeong.github.io/pipeline/2024-01-26-git.html)
