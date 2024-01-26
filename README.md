@@ -4,9 +4,9 @@ title: How to use
 permalink: /
 ---
 
-Make Jelly site have a GitBook look!
+Overview of this page !
 
-## Demo
+## Demo & Resources
 
 [![Static Badge](https://img.shields.io/badge/Jekyll%20Gitbook%20Themes-yellowgreen)
 ](https://sighingnow.github.io/jekyll-gitbook)
@@ -27,8 +27,8 @@ Make Jelly site have a GitBook look!
 
 ## Purpose
 
-- [USD](https://taiyeong.github.io/pipeline/2024-01-26-git.html)
-- [Git](https://taiyeong.github.io/pipeline/2024-01-26-usd.html)
+- [USD](https://taiyeong.github.io/pipeline/2024-01-26-git.html) - case 단위의 api 적어놓기
+- [Git](https://taiyeong.github.io/pipeline/2024-01-26-usd.html) - tablet 내용 추가 및 정리
 - [Build Jekyll blog]()
 - [pyenv]()
 - [Rocky Linux setup]()
