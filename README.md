@@ -21,8 +21,8 @@ Make Jelly site have a GitBook look!
 2. With tool, Add post / Check in localhost / Publish ( git push )
 
 ## Tip : rule
-- ## : main title
-- ### : sub title
+- \## : main title
+- \### : sub title
 - more than four sharp : Could not appear on menu tree
 
 ## Purpose
