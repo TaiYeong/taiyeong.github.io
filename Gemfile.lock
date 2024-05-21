@@ -1,6 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    actionmailer (0.6.1)
+      actionpack (>= 0.9.5)
+    actionpack (1.4.0)
+    activemodel (7.1.3)
+      activesupport (= 7.1.3)
+    activerecord (7.1.3)
+      activemodel (= 7.1.3)
+      activesupport (= 7.1.3)
+      timeout (>= 0.4.0)
     activesupport (7.1.3)
       base64
       bigdecimal
@@ -26,11 +35,13 @@ GEM
       http_parser.rb (~> 0)
     eventmachine (1.2.7)
     ffi (1.16.3)
+    ffi (1.16.3-x64-mingw-ucrt)
     forwardable-extended (2.6.0)
     gemoji (4.1.0)
     google-protobuf (3.25.2)
     google-protobuf (3.25.2-aarch64-linux)
     google-protobuf (3.25.2-arm64-darwin)
+    google-protobuf (3.25.2-x64-mingw-ucrt)
     google-protobuf (3.25.2-x86-linux)
     google-protobuf (3.25.2-x86_64-darwin)
     google-protobuf (3.25.2-x86_64-linux)
@@ -95,24 +106,19 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.0-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.0-x64-mingw-ucrt)
+      racc (~> 1.4)
     nokogiri (1.16.0-x86-linux)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
-    passenger (6.0.20)
-      rack
-      rake (>= 0.8.1)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (5.0.4)
     racc (1.7.3)
     rack (1.6.13)
-    rack-handler-apache (0.0.2)
-      passenger
-      rack
-      ttyname
     rack-handlers (0.7.3)
       rack
     rack-protection (1.5.5)
@@ -122,6 +128,11 @@ GEM
     rackup (1.0.0)
       rack (< 3)
       webrick
+    rails (0.9.5)
+      actionmailer (>= 0.6.1)
+      actionpack (>= 1.4.0)
+      activerecord (>= 1.6.0)
+      rake (>= 0.4.15)
     rake (13.1.0)
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
@@ -140,6 +151,8 @@ GEM
     sass-embedded (1.70.0-arm-linux-musleabihf)
       google-protobuf (~> 3.25)
     sass-embedded (1.70.0-arm64-darwin)
+      google-protobuf (~> 3.25)
+    sass-embedded (1.70.0-x64-mingw-ucrt)
       google-protobuf (~> 3.25)
     sass-embedded (1.70.0-x86-linux)
       google-protobuf (~> 3.25)
@@ -165,8 +178,8 @@ GEM
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     tilt (2.3.0)
+    timeout (0.4.1)
     to_api (1.3.0)
-    ttyname (1.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
@@ -178,6 +191,7 @@ PLATFORMS
   arm-linux
   arm-linux-musleabihf
   arm64-darwin
+  x64-mingw-ucrt
   x86-linux
   x86-linux-musl
   x86_64-darwin
@@ -192,9 +206,9 @@ DEPENDENCIES
   jekyll-remote-theme
   jemoji
   rack
-  rack-handler-apache (~> 0.0.2)
   rack-handlers (~> 0.7.1)
   rackup
+  rails
   rake
   sinatra (~> 1.4, >= 1.4.7)
   to_api (~> 1.3)
