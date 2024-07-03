@@ -4,21 +4,16 @@ layout: home
 permalink: "/"
 ---
 
-Overview of this page !
-
-## Demo & Resources
-
-[![Static Badge](https://img.shields.io/badge/Jekyll%20Gitbook%20Themes-yellowgreen)
-](https://sighingnow.github.io/jekyll-gitbook)
-[![Static Badge](https://img.shields.io/badge/Jekyll%20Gitbook%20github-blue)
-](https://github.com/sighingnow/jekyll-gitbook)
-[![Static Badge](https://img.shields.io/badge/badgeMaker-Shields%20io-important)
-](https://shields.io/badges)
-
 ## Step by Step
 
 1. Not summary, Write useful contents!
-2. With tool, Add post / Check in localhost / Publish ( git push )
+2. With tool, Add post 
+    - create file : year-month-date-title.md under _posts
+    - Check in localhost 
+    ```
+    bundle exec jekyll serve
+    ```
+    - Publish : git commit -> git push
 
 ## Tip : rule
 - \## : main title
@@ -37,3 +32,21 @@ Overview of this page !
 - [Openpype Setup]()
 - [Gaffer Setup]()
 - [MongoDB Setup]()
+
+
+## Demo & Resources
+
+[![Static Badge](https://img.shields.io/badge/Jekyll%20Gitbook%20Themes-yellowgreen)
+](https://sighingnow.github.io/jekyll-gitbook)
+[![Static Badge](https://img.shields.io/badge/Jekyll%20Gitbook%20github-blue)
+](https://github.com/sighingnow/jekyll-gitbook)
+[![Static Badge](https://img.shields.io/badge/badgeMaker-Shields%20io-important)
+](https://shields.io/badges)
+
+
+### 공부법
+- 파레토의 법칙 : 공부할지식이 100% 라고할때, 20%의 지식이 나머지 80%를 좌우한다라는 법칙
+- 디버깅 일기 : 버그들을 일기형태로 저장
+    - 제목 : 에러 메세지
+    - 원인 / 해결방향 / 관련 지식 및 용어
+- First word : 모르는 영역을 공부할때는, terminology를 제대로 이해하고 넘어가라 ! 
