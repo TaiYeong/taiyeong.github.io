@@ -109,15 +109,33 @@ title: Computer Graphics
     Here, $\mathbf{L} \cdot \mathbf{N}$ gives the projection of the light vector onto the normal vector, representing how much of the light is directly hitting the surface.
 
 
-### barycentric interpolation
+### barycentric interpolation (무게중심)
+![barycentricInterpolation](../assets/computer_graphics_barycentric_001.png)
+- using this formula, we can get interpolated point P based on three point information.
+- for example, we can get interpolated color of points which are in triangle.
+  - ![colorInterpolation](../assets/computer_graphics_barycentric_002.png)
 
-
+---
 
 ## Use Cases
+- The part is to know how mathmatics and computer graphics knowledge can be used.
+
 ### hair deformation based on animated meshes
 ![deformBasedonAnim](../assets/GuideDeform_001.jpg)
+1. Let's assume that every point of mesh is moved when it is animated. if so, we can define how they move using rest position / tralate information / rotate information (quaternion)
+
+2. Define translate / rest / rotate information
+   - To define how they translate, we will use substration between moved point and rest point.
+   - To define rest position, we will store points of rest mesh
+   - To define how they rotate, we will use three kinds of vector ( surface normal vector/ bi-normal vector / tangent vector ) and quaternion
+
+3. based on translate / rest / rotate information of meshes, we will get translate / rest / rotate information of root point of strand by using skinprinuv, skinprim and barycentric interpolation
+
+4. And at last, we can get exact point position using interpoated information ( translate / rest / rotate )
 
 ### hair deformation based on simulated curves
 ![deformBasedonSimGuide](../assets/SimGuideDeform_001.jpg)
+- main principle : Interpolate information of three points which are in simulated guides. if we interpolate information, we can get point position of rendered hair.
 
-### Tweak hair (lenght / tip or root width)
+### Tweak hair ( length )
+- main principle : Let's assume that one strand is consist of several points and edges. if so, we can know x,y,z information of each point. In this situation, if we subtract one point from another point, it gives you vector. then if we multiply the vector by a scalar magnitude which you want to put in as a length, the result is legnth that we mean to get.
