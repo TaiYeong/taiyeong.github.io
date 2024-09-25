@@ -120,7 +120,7 @@ title: Computer Graphics
 ## Use Cases
 - The part is to know how mathmatics and computer graphics knowledge can be used.
 
-### hair deformation based on animated meshes
+### hair deformation based on animated meshes 01
 ![deformBasedonAnim](../assets/GuideDeform_001.jpg)
 1. Let's assume that every point of mesh is moved when it is animated. if so, we can define how they move using rest position / tralate information / rotate information (quaternion)
 
@@ -132,6 +132,11 @@ title: Computer Graphics
 3. based on translate / rest / rotate information of meshes, we will get translate / rest / rotate information of root point of strand by using skinprinuv, skinprim and barycentric interpolation
 
 4. And at last, we can get exact point position using interpoated information ( translate / rest / rotate )
+
+### hair deformation based on animated meshes 02
+![deformBasedonAnim](../assets/GuideDeform_002.jpg)
+- [using Bilinear Interpolation](https://atonlee.tistory.com/52)
+- refer to skinprimuv coordinate information.
 
 ### hair deformation based on simulated curves
 ![deformBasedonSimGuide](../assets/SimGuideDeform_001.jpg)
