@@ -109,6 +109,27 @@ title: Computer Graphics
     Here, $\mathbf{L} \cdot \mathbf{N}$ gives the projection of the light vector onto the normal vector, representing how much of the light is directly hitting the surface.
 
 
+### Vector
+
+![vector_basic_001](../assets/mathmatics/vec_001.jpg)
+![vector_basic_002](../assets/mathmatics/vec_002.jpg)
+![vector_basic_003](../assets/mathmatics/vec_003.jpg)
+![vector_basic_004](../assets/mathmatics/vec_004.jpg)
+![vector_basic_005](../assets/mathmatics/vec_005.jpg)
+![vector_basic_006](../assets/mathmatics/vec_006.jpg)
+
+
+### Column vector / Transformation Matrix / Local and Global frames
+- 각 좌표계 (frame) 을 정의하는 기준이 되는 세개의 vectors를 가지고 변환행렬 (column vector) 을 만들고 이를 활용해서, 두 좌표계를 왔다갔다 한다.
+- global frame의 점과 local frame 를 정의하는 column vector(변환행렬) 을 가지고 local frame의 수치를 구한다고하면, 역행렬을 global frame에 속해있는 수치에 곱해준다.
+
+![how_to_get_local_frame's_value_002](../assets/mathmatics/vec_column_and_frame_002.jpg)
+
+- 그렇게 구한 A local frame에 속해있는 특정 값을, 다른 B local frame의 값으로 
+
+![how_to_get_local_frame's_value](../assets/mathmatics/vec_column_and_frame_001.jpg)
+
+
 ### barycentric interpolation (무게중심)
 ![barycentricInterpolation](../assets/computer_graphics_barycentric_001.png)
 - using this formula, we can get interpolated point P based on three point information.
@@ -120,8 +141,12 @@ title: Computer Graphics
 ## Use Cases
 - The part is to know how mathmatics and computer graphics knowledge can be used.
 
+### Use Column vector to 
+
 ### hair deformation based on animated meshes 01
 ![deformBasedonAnim](../assets/GuideDeform_001.jpg)
+
+#### Logic 01 - using interloated Translate / Rest points / Rotation (quanternion)
 1. Let's assume that every point of mesh is moved when it is animated. if so, we can define how they move using rest position / tralate information / rotate information (quaternion)
 
 2. Define translate / rest / rotate information
@@ -132,6 +157,15 @@ title: Computer Graphics
 3. based on translate / rest / rotate information of meshes, we will get translate / rest / rotate information of root point of strand by using skinprinuv, skinprim and barycentric interpolation
 
 4. And at last, we can get exact point position using interpoated information ( translate / rest / rotate )
+
+#### Logic 02 - using Column vector
+- Gloabl to local A, and then local A to local B, and then local B to Global
+
+![guidedeform_logic_02_001](../assets/mathmatics/guideDeform_using_columnvec_001.jpg)
+![guidedeform_logic_02_002](../assets/mathmatics/guideDeform_using_columnvec_002.jpg)
+![guidedeform_logic_02_003](../assets/mathmatics/guideDeform_using_columnvec_003.jpg)
+![guidedeform_logic_02_004](../assets/mathmatics/guideDeform_using_columnvec_004.jpg)
+![guidedeform_logic_02_005](../assets/mathmatics/guideDeform_using_columnvec_005.jpg)
 
 ### hair deformation based on animated meshes 02
 ![deformBasedonAnim](../assets/GuideDeform_002.jpg)
