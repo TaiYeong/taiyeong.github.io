@@ -15,6 +15,11 @@ permalink: "/"
     ```
     - Publish : git commit -> git push
 
+## What is the meaning of `understanding` and `my knowledge` after `reading and listening something`
+- 자료를 만든 작가의 의도 파악
+- 그 자료를 안보고 내 표현으로 표현할 수 있어야함
+- 실제로 사용가능한 지식
+
 ## Tip : rule
 - \## : main title
 - \### : sub title
