@@ -1,5 +1,86 @@
+/* Dark theme code block styles */
+.book.color-theme-2 .language-python.highlighter-rouge .highlight {
+    background: transparent;
+}
+
+/* Comments */
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .c,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .c1,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .cm,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .cs,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .cp {
+    color: #7a9c7a !important;
+    background: none !important;
+}
+
+/* Strings */
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .s,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .s1,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .s2,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .sr,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight .sx {
+    color: #e69c41 !important;
+    background: none !important;
+}
+
+/* String quotes and punctuation */
+.book.color-theme-2 div.highlight .p {
+    color: #e69c41 !important;
+}
+
+/* Remove all highlights from code blocks */
+.book.color-theme-2 .highlight mark,
+.book.color-theme-2 .highlight *::selection,
+.book.color-theme-2 .highlight *::-moz-selection,
+.book.color-theme-2 .language-python.highlighter-rouge .highlight mark,
+.book.color-theme-2 .language-python.highlighter-rouge mark {
+    background-color: transparent !important;
+    background: none !important;
+    color: inherit !important;
+}
+
+/* Reset any text highlight styles */
+.book.color-theme-2 .highlight .p mark {
+    all: unset !important;
+    color: #e69c41 !important;
+}
+
 /* This file is kept intentionally blank inside the jekyll-github-theme
  * It gets imported at the end of custom.css
  * Its purpose is for users of the theme to be able to add css rules from a blank file
  *   these get simply added to the ones already active in the layout.
  */
+
+/* Remove inline/background boxes and gutter-like highlights inside code blocks */
+.book.color-theme-2 div.highlight span,
+.book.color-theme-2 div.highlight span[class*="hl"],
+.book.color-theme-2 div.highlight span[style],
+.book.color-theme-2 div.highlight .lineno,
+.book.color-theme-2 div.highlight .gp,
+.book.color-theme-2 div.highlight .gh,
+.book.color-theme-2 div.highlight .gi,
+.book.color-theme-2 div.highlight .gd,
+.book.color-theme-2 div.highlight .gr,
+.book.color-theme-2 div.highlight .na,
+.book.color-theme-2 div.highlight .nn,
+.book.color-theme-2 div.highlight .nt,
+.book.color-theme-2 div.highlight .o,
+.book.color-theme-2 div.highlight .ch,
+.book.color-theme-2 div.highlight .cm,
+.book.color-theme-2 div.highlight .w {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: inherit !important;
+}
+
+/* Ensure any <mark> or selection inside code blocks is transparent */
+.book.color-theme-2 div.highlight mark,
+.book.color-theme-2 div.highlight *::selection,
+.book.color-theme-2 div.highlight *::-moz-selection {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: inherit !important;
+}
