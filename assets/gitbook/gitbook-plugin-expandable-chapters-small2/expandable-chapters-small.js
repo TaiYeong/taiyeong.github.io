@@ -44,15 +44,19 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
         }
         expand(lsItem());
 
-        // expand current selected chapter with it's parents
-        var activeChapter = $(CHAPTER + '.active');
-        expand(activeChapter);
+        // optionally expand current selected chapter with its parents (opt-in via config)
+        var config = gitbook.state.config.pluginsConfig || {};
+        var expandActive = config && config[PLUGIN] && config[PLUGIN].expandActive;
+        if (expandActive) {
+            var activeChapter = $(CHAPTER + '.active');
+            expand(activeChapter);
 
-        // expand current selected chapter's children
-        // expand(activeChapter.parents(CHAPTER));
-        activeChapter.find(ARTICLE_CHILDREN).closest(FOLDABLE).each(function () {
-            expand($(this));
-        });
+            // expand current selected chapter's children
+            // expand(activeChapter.parents(CHAPTER));
+            activeChapter.find(ARTICLE_CHILDREN).closest(FOLDABLE).each(function () {
+                expand($(this));
+            });
+        }
     }
 
     var toggle = function ($chapter) {
