@@ -84,3 +84,29 @@
     background-color: transparent !important;
     color: inherit !important;
 }
+
+/* Custom image lightbox overlay */
+#custom-zoom-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 99999;
+    cursor: zoom-out;
+    justify-content: center;
+    align-items: center;
+}
+
+#custom-zoom-overlay.active {
+    display: flex;
+}
+
+#custom-zoom-img {
+    width: 96vw;
+    height: 96vh;
+    object-fit: contain;
+    pointer-events: none;
+}
