@@ -87,7 +87,6 @@
 
 /* Custom image lightbox overlay */
 #custom-zoom-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -96,12 +95,17 @@
     background: rgba(0, 0, 0, 0.85);
     z-index: 99999;
     cursor: zoom-out;
+    display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 #custom-zoom-overlay.active {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
 }
 
 #custom-zoom-img {
@@ -109,4 +113,10 @@
     height: 96vh;
     object-fit: contain;
     pointer-events: none;
+    transform: scale(0.6);
+    transition: transform 0.3s ease;
+}
+
+#custom-zoom-overlay.active #custom-zoom-img {
+    transform: scale(1);
 }
