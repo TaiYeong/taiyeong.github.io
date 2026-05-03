@@ -55,3 +55,26 @@ permalink: "/"
     - 제목 : 에러 메세지
     - 원인 / 해결방향 / 관련 지식 및 용어
 - First word : 모르는 영역을 공부할때는, terminology를 제대로 이해하고 넘어가라 ! 
+
+### Space 규칙
+
+#### One Drive folder
+비자 등 관련된 중요한 문서들
+
+#### Google Drive
+
+##### Gemini-Drive
+Gemini를 통해 알게된 보고서 및 답변들
+
+##### Gemini-Gems
+Gems에 feed할 자료들 위주
+
+### Scheduling 규칙
+#### Google Calender - 일정
+Uncommon schedule - 결혼 기념일, 생일 등 가족 또는 다른 사람과의 일정
+
+#### Google Calender - 할 일 / Tasks
+Regular schedule (Routine) - 식물의 물주기 등 매일은 아니지만 1주일 또는 한달 단위의 루틴 일정
+
+#### Planning Note
+그 날 새롭게 갱신되는 업무 또는 일들
