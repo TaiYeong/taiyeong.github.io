@@ -203,3 +203,47 @@
 .markdown-alert p:last-child {
     margin-bottom: 0;
 }
+
+/* --- Search results readability --- */
+#book-search-results .search-results ul.search-results-list li.search-results-item {
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid rgba(125, 125, 125, 0.18);
+}
+
+#book-search-results .search-results-item .search-result-breadcrumb {
+    font-size: 0.78rem;
+    line-height: 1.3;
+    opacity: 0.6;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.01em;
+}
+
+#book-search-results .search-results-item h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.05rem;
+    line-height: 1.35;
+}
+
+#book-search-results .search-results-item h3 a {
+    text-decoration: none;
+}
+
+#book-search-results .search-results-item h3 a:hover {
+    text-decoration: underline;
+}
+
+#book-search-results .search-results-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    opacity: 0.85;
+}
+
+#book-search-results span.search-highlight-keyword {
+    background: #ffd83d;
+    color: #1a1a1a;
+    border-radius: 2px;
+    padding: 0 1px;
+    font-weight: 600;
+}
