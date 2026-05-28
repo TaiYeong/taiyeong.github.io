@@ -1,0 +1,4 @@
+- [User Profile](user_profile.md) — VFX pipeline TD at Bardel; bilingual KO/EN blog; AI chat logs → polished _posts/ integration
+- [Blog Structure](blog_structure.md) — Jekyll/gitbook conventions: heading depth rules, TOC limits (h_max:3), front matter, permalink pattern
+- [Post Map](post_map.md) — Semantic map of all published posts, topics, backlink targets, and sections added per session
+- [Integration Patterns](integration_patterns.md) — How to extract from AI Q&A logs, placement rules, style conventions, what to strip
