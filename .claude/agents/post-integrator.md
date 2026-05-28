@@ -47,7 +47,7 @@ Before modifying the `_posts/` file:
 5. **Verify heading hierarchy**: Ensure all headings comply with the `##`/`###`/`####` rules
 
 ### Step 5: Cleanup
-1. After successful integration, **do not automatically delete** the temp_posts file — report what was done and ask the user if they want to remove or archive it
+1. After successful integration, **clear the content of each processed temp_posts file** (write an empty string to the file) — do not delete the file itself
 2. Present a clear summary of:
    - Which sections were added/modified
    - Where content was inserted (not just appended)
