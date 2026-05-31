@@ -1,0 +1,4 @@
+- [User Profile](user-profile.md) — Korean VFX TD in Canada, band 6 target 7-8, learns via formulas/templates, prefers Korean coaching + English content
+- [Speaking Task 6 Errors](speaking-task6-errors.md) — 6 confirmed recurring grammar/vocab errors from 2025-10-21 practice; band estimate ~5-6 for that task
+- [Speaking Task 6 Template](speaking-task6-template.md) — 8-slot master formula introduced 2025-10-21; timing budget, decision tree, worked example all provided
+- [Jekyll Blog Conventions](jekyll-blog-conventions.md) — front matter shape, heading limits (##/### only), category choices, file naming rules
