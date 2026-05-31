@@ -123,34 +123,42 @@
 
 /* GitHub Markdown Alerts Styling */
 .markdown-alert {
-    padding: 0.85rem 1rem;
-    margin-bottom: 16px;
+    padding: 0.9rem 1.15rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
     color: inherit;
-    border-left: 0.25em solid #8b949e; /* Default color */
+    border: 1px solid rgba(125, 125, 125, 0.14);
+    border-left: 4px solid #8b949e; /* Default color */
     background-color: var(--color-bg-tertiary, rgba(125, 125, 125, 0.05));
-    border-radius: 6px;
-    transition: background-color 0.2s ease, border-left-color 0.2s ease;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: background-color 0.2s ease, border-left-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .book.color-theme-2 .markdown-alert {
-    background-color: rgba(9, 10, 11, 0.2);
+    background-color: rgba(255, 255, 255, 0.025);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: none;
 }
 
 .markdown-alert:hover {
     background-color: var(--color-bg-tertiary-hover, rgba(125, 125, 125, 0.1));
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .book.color-theme-2 .markdown-alert:hover {
-    background-color: rgba(9, 10, 11, 0.3);
+    background-color: rgba(255, 255, 255, 0.045);
+    box-shadow: none;
 }
 
 .markdown-alert .markdown-alert-title {
     display: flex;
-    font-weight: 600;
-    font-size: 0.95em;
+    font-weight: 700;
+    font-size: 0.9em;
+    letter-spacing: 0.02em;
     align-items: center;
     line-height: 1;
-    margin-bottom: 0.5rem !important; 
+    margin-bottom: 0.6rem !important;
 }
 
 /* Specific Alert Type Colors */
@@ -533,3 +541,195 @@
 /* Recommendation: KEEP 800px. Current page_width in _config.yml is already
    optimal for mixed Korean/English/code content at 15px body size.
    See readability-design-spec.md Section 10 for full rationale. */
+
+/* ================================================================
+   CODE BLOCK READABILITY — 2026-05-30
+   Improvements:
+     1. Language badge header bar (all common languages)
+     2. Global comment color fix (covers all languages, not just python)
+     3. Subtle dark-mode border on code block container
+     4. Keyword & operator token colors restored in dark mode
+   ================================================================ */
+
+/* --- 1. Dark-mode code block border --- */
+.book.color-theme-2 div.highlighter-rouge {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 5px;
+  overflow: hidden; /* keeps child background flush with rounded corners */
+}
+
+/* --- 2. Language badge — BLOCK-LEVEL ONLY header bar via ::before ---
+   CRITICAL: every selector is scoped to `div.` so it matches fenced code
+   blocks (<div class="language-X highlighter-rouge">) but NOT inline code
+   (<code class="language-plaintext highlighter-rouge">). Without `div.`,
+   every inline `code` span renders a stray "PLAIN" badge. Also: plaintext/
+   text blocks get NO badge — a "PLAIN" label adds noise, not information. */
+
+/* Shared badge visual style — activated per-language below */
+.book.color-theme-2 div.language-python.highlighter-rouge::before,
+.book.color-theme-2 div.language-bash.highlighter-rouge::before,
+.book.color-theme-2 div.language-sh.highlighter-rouge::before,
+.book.color-theme-2 div.language-shell.highlighter-rouge::before,
+.book.color-theme-2 div.language-zsh.highlighter-rouge::before,
+.book.color-theme-2 div.language-powershell.highlighter-rouge::before,
+.book.color-theme-2 div.language-ps1.highlighter-rouge::before,
+.book.color-theme-2 div.language-javascript.highlighter-rouge::before,
+.book.color-theme-2 div.language-js.highlighter-rouge::before,
+.book.color-theme-2 div.language-typescript.highlighter-rouge::before,
+.book.color-theme-2 div.language-ts.highlighter-rouge::before,
+.book.color-theme-2 div.language-json.highlighter-rouge::before,
+.book.color-theme-2 div.language-yaml.highlighter-rouge::before,
+.book.color-theme-2 div.language-yml.highlighter-rouge::before,
+.book.color-theme-2 div.language-cpp.highlighter-rouge::before,
+.book.color-theme-2 div.language-c.highlighter-rouge::before,
+.book.color-theme-2 div.language-cmake.highlighter-rouge::before,
+.book.color-theme-2 div.language-dockerfile.highlighter-rouge::before,
+.book.color-theme-2 div.language-docker.highlighter-rouge::before,
+.book.color-theme-2 div.language-ruby.highlighter-rouge::before,
+.book.color-theme-2 div.language-html.highlighter-rouge::before,
+.book.color-theme-2 div.language-css.highlighter-rouge::before,
+.book.color-theme-2 div.language-scss.highlighter-rouge::before,
+.book.color-theme-2 div.language-sql.highlighter-rouge::before,
+.book.color-theme-2 div.language-xml.highlighter-rouge::before,
+.book.color-theme-2 div.language-houdini.highlighter-rouge::before,
+.book.color-theme-2 div.language-vex.highlighter-rouge::before,
+.book.color-theme-2 div.language-lua.highlighter-rouge::before,
+.book.color-theme-2 div.language-toml.highlighter-rouge::before,
+.book.color-theme-2 div.language-ini.highlighter-rouge::before,
+.book.color-theme-2 div.language-diff.highlighter-rouge::before {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.67em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35em 0.9em 0.3em;
+  color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.8;
+}
+
+/* Language label text */
+.book.color-theme-2 div.language-python.highlighter-rouge::before     { content: "Python"; }
+.book.color-theme-2 div.language-bash.highlighter-rouge::before       { content: "Bash"; }
+.book.color-theme-2 div.language-sh.highlighter-rouge::before         { content: "Shell"; }
+.book.color-theme-2 div.language-shell.highlighter-rouge::before      { content: "Shell"; }
+.book.color-theme-2 div.language-zsh.highlighter-rouge::before        { content: "Zsh"; }
+.book.color-theme-2 div.language-powershell.highlighter-rouge::before { content: "PowerShell"; }
+.book.color-theme-2 div.language-ps1.highlighter-rouge::before        { content: "PowerShell"; }
+.book.color-theme-2 div.language-javascript.highlighter-rouge::before { content: "JavaScript"; }
+.book.color-theme-2 div.language-js.highlighter-rouge::before         { content: "JavaScript"; }
+.book.color-theme-2 div.language-typescript.highlighter-rouge::before { content: "TypeScript"; }
+.book.color-theme-2 div.language-ts.highlighter-rouge::before         { content: "TypeScript"; }
+.book.color-theme-2 div.language-json.highlighter-rouge::before       { content: "JSON"; }
+.book.color-theme-2 div.language-yaml.highlighter-rouge::before       { content: "YAML"; }
+.book.color-theme-2 div.language-yml.highlighter-rouge::before        { content: "YAML"; }
+.book.color-theme-2 div.language-cpp.highlighter-rouge::before        { content: "C++"; }
+.book.color-theme-2 div.language-c.highlighter-rouge::before          { content: "C"; }
+.book.color-theme-2 div.language-cmake.highlighter-rouge::before      { content: "CMake"; }
+.book.color-theme-2 div.language-dockerfile.highlighter-rouge::before { content: "Dockerfile"; }
+.book.color-theme-2 div.language-docker.highlighter-rouge::before     { content: "Dockerfile"; }
+.book.color-theme-2 div.language-ruby.highlighter-rouge::before       { content: "Ruby"; }
+.book.color-theme-2 div.language-html.highlighter-rouge::before       { content: "HTML"; }
+.book.color-theme-2 div.language-css.highlighter-rouge::before        { content: "CSS"; }
+.book.color-theme-2 div.language-scss.highlighter-rouge::before       { content: "SCSS"; }
+.book.color-theme-2 div.language-sql.highlighter-rouge::before        { content: "SQL"; }
+.book.color-theme-2 div.language-xml.highlighter-rouge::before        { content: "XML"; }
+.book.color-theme-2 div.language-houdini.highlighter-rouge::before    { content: "Houdini"; }
+.book.color-theme-2 div.language-vex.highlighter-rouge::before        { content: "VEX"; }
+.book.color-theme-2 div.language-lua.highlighter-rouge::before        { content: "Lua"; }
+.book.color-theme-2 div.language-toml.highlighter-rouge::before       { content: "TOML"; }
+.book.color-theme-2 div.language-ini.highlighter-rouge::before        { content: "INI"; }
+.book.color-theme-2 div.language-diff.highlighter-rouge::before       { content: "Diff"; }
+
+/* --- 3. Global comment color — covers all languages (not just python) ---
+   Must come AFTER the reset block (lines 55-77) to override color:inherit !important */
+.book.color-theme-2 div.highlight .c,
+.book.color-theme-2 div.highlight .c1,
+.book.color-theme-2 div.highlight .cm,
+.book.color-theme-2 div.highlight .cs,
+.book.color-theme-2 div.highlight .cp,
+.book.color-theme-2 div.highlight .ch,
+.book.color-theme-2 div.highlight .cpf {
+  color: #7a9c7a !important;
+  background: none !important;
+  font-style: italic;
+}
+
+/* --- 4. Keyword tokens in dark mode --- */
+.book.color-theme-2 div.highlight .k,
+.book.color-theme-2 div.highlight .kd,
+.book.color-theme-2 div.highlight .kn,
+.book.color-theme-2 div.highlight .kp,
+.book.color-theme-2 div.highlight .kr,
+.book.color-theme-2 div.highlight .kt,
+.book.color-theme-2 div.highlight .kc {
+  color: #c792ea !important;
+  background: none !important;
+}
+
+/* --- 5. Operator tokens in dark mode (restore from color:inherit reset) --- */
+.book.color-theme-2 div.highlight .o,
+.book.color-theme-2 div.highlight .ow {
+  color: #89ddff !important;
+  background: none !important;
+}
+
+/* --- 6. Function/method name tokens --- */
+.book.color-theme-2 div.highlight .nf,
+.book.color-theme-2 div.highlight .fm {
+  color: #82aaff !important;
+  background: none !important;
+}
+
+/* --- 7. Inline code — distinct, readable pill (all themes) ---
+   Inline `code` is <code class="language-plaintext highlighter-rouge"> with no
+   wrapping <div>, so these rules target the bare code element. A soft tinted
+   background + accent text makes inline code legible without the heavy look of
+   a full code block, and clearly distinct from surrounding prose. */
+.markdown-section code.highlighter-rouge,
+.markdown-section p code,
+.markdown-section li code,
+.markdown-section td code {
+  font-size: 0.86em;
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  background: rgba(125, 125, 125, 0.13);
+  color: #c7254e; /* light-theme accent */
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Light "color-theme-1" (sepia) inline code */
+.book.color-theme-1 .markdown-section code.highlighter-rouge,
+.book.color-theme-1 .markdown-section p code,
+.book.color-theme-1 .markdown-section li code,
+.book.color-theme-1 .markdown-section td code {
+  background: rgba(112, 66, 20, 0.1);
+  color: #9a4a1a;
+}
+
+/* Dark "color-theme-2" inline code — soft slate pill, light accent text */
+.book.color-theme-2 .markdown-section code.highlighter-rouge,
+.book.color-theme-2 .markdown-section p code,
+.book.color-theme-2 .markdown-section li code,
+.book.color-theme-2 .markdown-section td code {
+  background: rgba(130, 170, 255, 0.12);
+  color: #b6c8ff;
+  border: 1px solid rgba(130, 170, 255, 0.12);
+}
+
+/* Don't double-style code that lives inside a fenced block or a heading/link */
+.markdown-section pre code,
+.markdown-section h1 code,
+.markdown-section h2 code,
+.markdown-section h3 code,
+.markdown-section h4 code,
+.markdown-section a code {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
