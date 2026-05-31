@@ -5,4 +5,5 @@ _site
 vendor
 
 /temp_posts
+/temp_for_english
 .claude/agent-memory/
