@@ -1,3 +1,4 @@
 - [User Profile](user_profile.md) — taiyeong.song, VFX pipeline TD, Korean/English mixed posts, knowledge-base note style
 - [Blog Conventions](project_blog_conventions.md) — Jekyll/GitBook sidebar rules, front matter requirements, heading level constraints
 - [Houdini Technical Notes](houdini_technical_notes.md) — VEX comment syntax, hou.Parm API casing, strreplace vs replace (Hscript vs VEX), code block language tags
+- [Claude Code Technical Notes](claude_code_technical_notes.md) — Hooks frontmatter syntax, file upload limits, session fork flags, project purge command
