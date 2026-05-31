@@ -65,5 +65,8 @@ plugins:
   - jekyll-readme-index
   - jemoji
 
+extra_css:
+  - "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+
 extra_header_js:
   - assets/gitbook/custom-alerts.js

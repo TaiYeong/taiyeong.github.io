@@ -247,3 +247,289 @@
     padding: 0 1px;
     font-weight: 600;
 }
+
+/* ================================================================
+   READABILITY REFINEMENTS — appended to end of custom-local.css
+   Date: 2026-05-30
+   Scope: typography / spacing / hierarchy only.
+         No structural, brand, or layout changes.
+   Prerequisites: Pretendard CDN added to _config.yml extra_css
+   ================================================================ */
+
+/* ------ SECTION 1: Font stack ------ */
+
+.markdown-section {
+  font-family:
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans KR",
+    sans-serif;
+}
+
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  font-family:
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans KR",
+    sans-serif;
+}
+
+/* ------ SECTION 2: Body text ------ */
+
+.markdown-section {
+  font-size: 15px;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+.markdown-section p {
+  margin-top: 0;
+  margin-bottom: 1.1em;
+  line-height: inherit;
+}
+
+/* ------ SECTION 3: Headings ------ */
+
+.markdown-section h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #e5e5e5;
+  line-height: 1.3;
+}
+
+.markdown-section h2 {
+  font-size: 1.75em;
+  font-weight: 700;
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #e5e5e5;
+  line-height: 1.35;
+}
+
+.markdown-section h3 {
+  font-size: 1.35em;
+  font-weight: 700;
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+  line-height: 1.4;
+}
+
+.markdown-section h4 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-top: 1.4em;
+  margin-bottom: 0.35em;
+  line-height: 1.45;
+}
+
+.book.color-theme-1 .markdown-section h1,
+.book.color-theme-1 .markdown-section h2 {
+  border-bottom-color: #d4c49a;
+}
+
+.book.color-theme-2 .markdown-section h1,
+.book.color-theme-2 .markdown-section h2 {
+  border-bottom-color: #373b4e;
+}
+
+/* ------ SECTION 4: Lists ------ */
+
+.markdown-section ul,
+.markdown-section ol {
+  margin-bottom: 1.1em;
+  padding-left: 1.75em;
+}
+
+.markdown-section li {
+  margin-bottom: 0.3em;
+  line-height: 1.75;
+}
+
+.markdown-section li:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-section ul ul,
+.markdown-section ul ol,
+.markdown-section ol ul,
+.markdown-section ol ol {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  padding-left: 1.5em;
+}
+
+/* ------ SECTION 5: Links ------ */
+
+.markdown-section a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(65, 131, 196, 0.4);
+}
+
+.markdown-section a:hover,
+.markdown-section a:focus {
+  text-decoration-color: #4183c4;
+  text-decoration-thickness: 2px;
+  outline: 0;
+}
+
+.book.color-theme-1 .markdown-section a {
+  text-decoration-color: rgba(112, 66, 20, 0.35);
+}
+.book.color-theme-1 .markdown-section a:hover,
+.book.color-theme-1 .markdown-section a:focus {
+  text-decoration-color: #704214;
+  text-decoration-thickness: 2px;
+}
+
+.book.color-theme-2 .markdown-section a {
+  text-decoration-color: rgba(62, 177, 208, 0.4);
+}
+.book.color-theme-2 .markdown-section a:hover,
+.book.color-theme-2 .markdown-section a:focus {
+  text-decoration-color: #3eb1d0;
+  text-decoration-thickness: 2px;
+}
+
+/* ------ SECTION 6: Code ------ */
+/* IMPORTANT: No color rules added for color-theme-2 code/pre here.
+   Those token colors are already set in existing custom-local.css rules
+   above and in website.css. */
+
+.markdown-section code {
+  font-size: 0.875em;
+  padding: 0.2em 0.45em;
+  border-radius: 4px;
+}
+
+.markdown-section pre {
+  font-size: 0.875em;
+  padding: 1em 1.1em;
+  margin-bottom: 1.25em;
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+/* ------ SECTION 7: Tables ------ */
+
+.markdown-section table {
+  font-size: 0.95em;
+  margin-bottom: 1.25em;
+}
+
+.markdown-section table th {
+  padding: 9px 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: bottom;
+}
+
+.markdown-section table td {
+  padding: 8px 14px;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.markdown-section table thead tr {
+  border-top: 2px solid #c8c8c8;
+}
+
+.book.color-theme-1 .markdown-section table thead tr {
+  border-top: 2px solid #d4b87a;
+}
+
+.book.color-theme-2 .markdown-section table thead tr {
+  border-top: 2px solid #4a5068;
+}
+
+/* ------ SECTION 8: Blockquotes ------ */
+/* Scoped to plain blockquotes only; .block-tip/.block-warning/.block-danger
+   (custom.css) and .markdown-alert family (above in this file) are unaffected. */
+
+.markdown-section blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
+  margin-top: 0;
+  margin-bottom: 1.1em;
+  padding: 0.1em 0 0.1em 1em;
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-left-color: #d0d0d0;
+  color: #666;
+  font-style: italic;
+}
+
+.markdown-section blockquote:not(.block-tip):not(.block-warning):not(.block-danger) p {
+  margin-bottom: 0.5em;
+}
+.markdown-section blockquote:not(.block-tip):not(.block-warning):not(.block-danger) p:last-child {
+  margin-bottom: 0;
+}
+
+.book.color-theme-1 .markdown-section blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
+  border-left-color: #c8a86a;
+  color: #8a6030;
+}
+
+.book.color-theme-2 .markdown-section blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
+  border-left-color: #4a5068;
+  color: #8a97aa;
+}
+
+/* ------ SECTION 9: Images ------ */
+/* The existing #custom-zoom-overlay / #custom-zoom-img lightbox rules
+   above in this file are unaffected by these layout rules. */
+
+.markdown-section img {
+  display: block;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  border-radius: 4px;
+}
+
+.markdown-section p img {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.markdown-section img + em,
+.markdown-section p > img ~ em {
+  display: block;
+  margin-top: -0.75em;
+  margin-bottom: 1em;
+  font-size: 0.82em;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
+
+.book.color-theme-2 .markdown-section img + em,
+.book.color-theme-2 .markdown-section p > img ~ em {
+  color: #6a7a8a;
+}
+
+/* ------ SECTION 10: Page width -- no rule, see comment ------ */
+/* Recommendation: KEEP 800px. Current page_width in _config.yml is already
+   optimal for mixed Korean/English/code content at 15px body size.
+   See readability-design-spec.md Section 10 for full rationale. */
