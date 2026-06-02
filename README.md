@@ -49,6 +49,39 @@ permalink: "/"
 ](https://shields.io/badges)
 
 
+## Claude Code Automation
+
+이 블로그에는 Claude Code CLI용 자동화 워크플로우가 내장되어 있습니다.
+
+### Slash Commands (자주 쓰는 명령어)
+
+| 명령어 | 인수 (선택) | 설명 |
+|---|---|---|
+| `/integrate-posts` | `2026-02-28-blender.md` 등 파일명 | `temp_posts/`의 AI 대화 메모를 정제해서 `_posts/`의 해당 포스트에 통합 후 스테이징 파일 초기화 |
+| `/ui-design` | `sidebar`, `typography`, `mobile` 등 | 현재 사이트 프런트엔드를 분석해 UI/UX 개선 스펙을 `temp_design/design-spec.md`에 저장 |
+| `/implement-frontend` | `Improvement 2` 등 특정 항목 | `temp_design/design-spec.md`의 스펙을 읽어 `_includes/`, `_layouts/`, `assets/`에 실제 구현 |
+| `/improve-frontend` | `sidebar`, `mobile` 등 | `/ui-design` → `/implement-frontend` 두 단계를 연속으로 실행 |
+
+### Agents (자동 실행되는 전문 에이전트)
+
+| 에이전트 | 트리거 예시 | 역할 |
+|---|---|---|
+| `post-integrator` | `temp_posts에 새 내용 생겼어, 포스트에 통합해줘` | AI 대화 로그를 정제해 `_posts/`의 올바른 위치에 문맥 기반으로 통합 |
+| `blog-post-reviewer` | `_posts/2026-04-12-usd.md 검토하고 개선해줘` | 특정 포스트의 기술 정확도 검토, 내용 보완, 헤딩 구조(`##`/`###`) 최적화 |
+| `celpip-coach-7to8` | `temp_for_english/2025-10-21-CELPIP.md 읽고 학습 자료로 만들어줘` | CELPIP Band 7-8 목표 코칭 — 템플릿 기반 Speaking/Writing 전략, `_posts/2025-10-21-CELPIP.md`에 통합 |
+| `english-expression-organizer` | `temp_for_english/2025-10-22-english.md 정리해줘` | 영어 표현 메모를 5컬럼 복습 테이블(표현/심상이미지/뉘앙스/예시문/상황해석)로 변환, `_posts/2025-10-22-english.md`에 저장 |
+
+### Staging 폴더 구조
+
+```
+temp_posts/          # AI 대화 메모 → /integrate-posts 로 _posts/에 통합
+temp_for_english/
+  2025-10-21-CELPIP.md   # CELPIP 연습 내용 → celpip-coach-7to8 에이전트 처리
+  2025-10-22-english.md  # 영어 표현 메모  → english-expression-organizer 에이전트 처리
+temp_design/
+  design-spec.md     # /ui-design 결과물 → /implement-frontend 가 읽어서 구현
+```
+
 ### 공부법
 - 파레토의 법칙 : 공부할지식이 100% 라고할때, 20%의 지식이 나머지 80%를 좌우한다라는 법칙
 - 디버깅 일기 : 버그들을 일기형태로 저장
