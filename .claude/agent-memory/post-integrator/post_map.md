@@ -35,12 +35,36 @@ Topics: Bardel pipeline dept structure (Surfacing/Lighting/Rendering), dev-items
 - `### Houdini skinprim / skinprimuv 데이터를 Geometry Nodes로 처리하기` — 4-step bilinear interpolation node tree for mapping Houdini Curves onto Skin Mesh surface; covers why Sample UV Surface and Sample Nearest Surface are insufficient; Deform Curves on Surface as alternative for Rest Pose pipelines
 - `### Mix Node` — Mix node reference: data types (Float/Vector/Color/Rotation), Factor behavior, Vector Uniform/Non-Uniform modes, Color blending modes, distinction from Join Geometry
 
-Backlink target for: any post touching Blender pipeline, asset management, or geometry nodes.
+**New sections added 2026-06-02** (within `## Official Docs > ### Scene` and new `### Python API`):
+- `#### bpy.types vs bpy.context vs bpy.data` — comparison table of the three namespaces with pipeline use cases
+- `#### bpy.types.Scene — Shot 메타데이터 주입` — full PropertyGroup + Panel + register/unregister pattern for injecting USD pipeline metadata into Scene; architecture comparison table (Python API vs Geometry Nodes vs Library Overrides)
+- `### Python API > #### bpy.types.Operator` — Operator architecture (WM registration, bl_idname, bl_label), execute() entry point, Early Return pattern, FINISHED/CANCELLED return semantics, `libraries.load` context manager caveat
+- `### Python API > #### 커스텀 Operator를 Add Menu / Search에 등록` — draw function injection into `VIEW3D_MT_mesh_add`
+- `### Python API > #### Viewport Add Menu & Search` — shortcut reference table (Shift+A, F3)
+
+Backlink target for: any post touching Blender pipeline, asset management, geometry nodes, or `bpy` API usage.
 
 ---
 
 ### `_posts/2024-07-26-unreal.md`
 Status: DELETED in working tree (git status shows `D _posts/2024-07-26-unreal.md`). Do not reference or link to this post until it is restored.
+
+---
+
+---
+
+### `2025-01-18-python.md` — "Python"
+Category: pipeline
+Topics: venv setup, Docstring conventions, Absolute vs Relative imports, `__future__`, `typing.Union`, `pandas` CRUD, `logging`
+
+**New section added 2026-06-02** (`## Context Manager`):
+- `### with vs try-finally` — explains `__enter__`/`__exit__` mechanism, why `with` is preferred in production over `try-finally`, `as` variable = `__enter__()` return value (not the function's return)
+- `#### File I/O — ShotGrid / JSON metadata`
+- `#### Asset Append/Link via bpy.data.libraries.load` — safe pattern: build `data_to` inside block, post-process outside block
+- `#### Artist Context Preservation` — `@contextmanager` pattern with `preserve_user_context()` for protecting artist mode/selection state
+- Backlink to Blender post for `bpy.types.Operator` context
+
+Backlink target for: any post touching Python patterns, Blender scripting, or pipeline tool development.
 
 ---
 
@@ -50,3 +74,4 @@ Status: DELETED in working tree (git status shows `D _posts/2024-07-26-unreal.md
 - **Blender pipeline**: Blender post is the primary target
 - **Asset management concepts** (Data-block, Fake User, Orphan Data): Blender post
 - **MCP / Plugin / Subagent**: ClaudeAI post
+- **Python scripting / context managers / bpy API**: Python post links to Blender post and vice versa
