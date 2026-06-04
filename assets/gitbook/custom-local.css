@@ -733,3 +733,50 @@
   color: inherit;
   padding: 0;
 }
+
+/* ================================================================
+   LIGHT / SEPIA MODE CODE BLOCK FIX — 2026-06-03
+   Problem: colorful.css (a dark-background Rouge theme) emits
+   unscoped token background-color rules that appear as black
+   rectangles (.w), a salmon-pink box (.err), and tinted patches
+   (.s/.si/.sr) in white and sepia mode.
+   Fix: neutralize all token-level backgrounds for every theme
+   that is NOT dark (color-theme-2). Token foreground colors are
+   intentionally untouched.
+   ================================================================ */
+
+/* --- Container background --- */
+.book:not(.color-theme-2) .highlight {
+  background-color: transparent !important;
+}
+
+/* --- Whitespace token (.w): kill black bg, fix faint #bbbbbb text --- */
+.book:not(.color-theme-2) .highlight .w {
+  background-color: transparent !important;
+  color: #333333 !important;
+}
+
+/* --- Error / invalid token (.err): kill salmon-pink box, keep red text --- */
+.book:not(.color-theme-2) .highlight .err {
+  background-color: transparent !important;
+}
+
+/* --- String tokens: kill faint pink tint --- */
+.book:not(.color-theme-2) .highlight .s,
+.book:not(.color-theme-2) .highlight .sb,
+.book:not(.color-theme-2) .highlight .dl,
+.book:not(.color-theme-2) .highlight .s2,
+.book:not(.color-theme-2) .highlight .sh,
+.book:not(.color-theme-2) .highlight .s1 {
+  background-color: transparent !important;
+}
+
+/* --- String interpolation token (.si): kill grey box --- */
+.book:not(.color-theme-2) .highlight .si {
+  background-color: transparent !important;
+}
+
+/* --- Regex / raw-string token (.sr): kill purple-tint box --- */
+.book:not(.color-theme-2) .highlight .sr {
+  background-color: transparent !important;
+}
