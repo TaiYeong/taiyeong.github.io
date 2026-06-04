@@ -85,6 +85,26 @@ title: Computer Graphics
 수학이나 물리 엔진, 또는 파이프라인 TD들 사이에서 공간의 '기준'을 말할 때 **Basis(기저)** 또는 **Frame**이라는 표현을 씁니다.
 *   객체의 표면 위 한 점에서의 위치와 방향을 정의하는 기준틀이라는 뜻입니다.
 
+#### Naive TBN 계산의 한계 — 파이프라인 파손 원인 3가지
+
+Groom/Hair 커브를 Blender Geometry Nodes에서 메쉬에 붙일 때, 흔히 사용하는 Cross Product 기반 TBN 공식인 $T = v_2 - v_1$, $N = T \times (v_3 - v_1)$, $B = T \times N$ 은 수학적으로는 평면을 구하는 정석적인 공식이지만, Katana/RenderMan + Houdini 파이프라인과 비교했을 때 다음 세 가지 이유로 결과가 어긋난다.
+
+**1. N의 오차 — Face Normal vs. Smooth (Interpolated) Normal**
+
+Cross Product로 구한 N은 해당 폴리곤이 정확히 바라보는 방향 하나(Faceted Face Normal)이다. 곡면이라도 각 폴리곤을 평평한 유리 조각으로 취급하므로, 커브 뿌리(Root)의 위치에 관계없이 같은 폴리곤 안의 모든 점이 동일한 N을 갖게 된다. 결과적으로 털이 폴리곤 경계마다 계단처럼 꺾인다.
+
+Katana/Houdini 디포머는 커브가 심어진 정확한 위치(Barycentric Coordinate)에 맞춰 주변 Vertex들의 Normal을 부드럽게 보간(Smooth Vertex Normal)한다. 파이프라인 매칭을 위해서는 반드시 보간된 N을 사용해야 한다.
+
+**2. T의 오차 — Edge Direction vs. UV Space Direction**
+
+$v_2 - v_1$을 T로 쓰면, T의 방향이 전적으로 '메쉬 엣지가 흘러가는 방향'과 'Vertex ID 순서'에 의존한다. 엣지 흐름이 불균일하거나 좌우 대칭 구간에서 Vertex ID 순서가 뒤집힌 경우 T 방향이 튀게 되어, 커브 전체가 Normal 축을 중심으로 회전(Twisting)하는 현상이 발생한다.
+
+프로덕션 표준은 **UV Map의 U 방향**을 기준으로 Tangent를 생성한다(MikkTSpace 알고리즘). UV가 펴진 일관된 방향을 T로 삼아야 커브 흐름이 렌더러와 일치한다.
+
+**3. Quad 메쉬의 비평면(Non-Planar) 오차**
+
+Face를 구성하는 4개의 Vertex 중 1, 2, 3번만 사용할 경우, Non-Planar Quad에서 1-2-3이 이루는 평면과 1-3-4가 이루는 평면의 기울기가 달라진다. 커브가 Quad의 어느 삼각형 측에 심어져 있는지에 따라 법선 방향이 미세하게 달라지며, 이 오차가 누적되면 렌더러와의 위치 어긋남으로 이어진다.
+
 
 ### Vector Dot & Cross product (Meaning)
 - [docs link](https://blog.naver.com/lavacat94/221514187661)
@@ -302,6 +322,63 @@ Utilize the algorithm to get a `interpolated root point` at `animated mesh`
 - main principle : Interpolate information of three points which are in simulated guides. if we interpolate information, we can get point position of rendered hair.
 
 ![deformBasedonSimGuide](../assets/SimGuideDeform_001.jpg)
+
+
+### Blender Geometry Nodes에서 정확한 TBN 추출 — skinprim / skinprimuv 기반
+
+Houdini의 `skinprim`과 `skinprimuv`를 Blender Geometry Nodes에서 재현할 때, TBN을 올바르게 구하려면 먼저 이 값들이 어떤 토폴로지 기준으로 계산되었는지 확인해야 한다.
+
+#### skinprim / skinprimuv의 토폴로지 기준
+
+`xyzdist` 노드(또는 VEX)를 실행할 당시의 타겟 메쉬(Skin) 상태를 그대로 따른다.
+
+| Houdini 메쉬 상태 | `skinprimuv` 해석 |
+|---|---|
+| **Quad** | 해당 사각형 면 위의 **Bilinear(이중 선형) 좌표** (0.0 ~ 1.0) |
+| **Triangle** | 해당 삼각형 면 위의 **Barycentric(무게중심) 좌표** |
+
+> **Quad Trap — 파이프라인 주의 사항**
+> Houdini에서 Quad 상태로 `skinprimuv`를 구하면, Blender에서 완벽하게 재구성하는 것은 불가능하다. Blender는 내부적으로 모든 지오메트리 연산에서 Quad를 두 개의 Triangle로 분할(Triangulate)한다. Houdini의 Quad Bilinear 수학과 Blender의 Triangle 분할 수학이 일치하지 않으므로, 커브가 표면에서 미끄러지거나 위치가 어긋난다.
+>
+> **해결책:** Groom 데이터 추출 전, Houdini에서 베이스 메쉬에 **Divide SOP (Triangulate 체크)** 를 적용하여 모든 면을 삼각형으로 변환한 뒤 `xyzdist`로 `skinprim`과 `skinprimuv`를 구한다. Blender와 Katana 양쪽에 **동일하게 Triangulate된 메쉬**를 전달해야 두 소프트웨어 간 오차율을 0으로 만들 수 있다.
+
+Blender에서의 skinprim/skinprimuv 처리 방식 전반은 [Blender — Houdini skinprim / skinprimuv 데이터를 Geometry Nodes로 처리하기](/pipeline/2026-02-28-blender.html)를 참고한다.
+
+#### Blender Geometry Nodes TBN 보간 노드 셋업
+
+베이스 메쉬가 Triangle으로 통일되어 있다는 전제하에, `skinprim`과 `skinprimuv`를 사용해 Smooth TBN을 구성하는 3단계 노드 설계다.
+
+Houdini 삼각형 `primuv` 수학에서 꼭짓점 0, 1, 2의 가중치는 다음과 같다.
+
+$$W_0 = 1.0 - u - v, \quad W_1 = u, \quad W_2 = v$$
+
+**Step 1 — 꼭짓점 3개의 데이터 추출**
+
+1. `Corners of Face` 노드의 `Face Index` 소켓에 `skinprim` (Named Attribute)을 연결한다. `Sort Index`를 0, 1, 2로 설정한 3개의 노드(또는 복사본)로 Face Corner Index 세 개를 확보한다.
+2. `Sample Index` 노드(총 6개)를 `Domain: Point` 또는 `Face Corner`로 설정하고, `Normal` (내장 속성)과 `UV Tangent` (Houdini PolyFrame으로 미리 구워 넘긴 TangentU Attribute)를 각각 샘플링하여 $N_0, N_1, N_2$, $T_0, T_1, T_2$를 얻는다.
+
+**Step 2 — Barycentric 보간 적용**
+
+`skinprimuv` (2D Vector)의 X를 $u$, Y를 $v$로 분리(`Separate XYZ`)한 뒤 가중치를 계산한다.
+
+- $W_1 = u$, $W_2 = v$, $W_0 = 1.0 - (u + v)$
+
+Vector Math (Scale & Add) 노드로 보간한다.
+
+$$N_{smooth} = N_0 \cdot W_0 + N_1 \cdot W_1 + N_2 \cdot W_2$$
+$$T_{smooth} = T_0 \cdot W_0 + T_1 \cdot W_1 + T_2 \cdot W_2$$
+
+각각 `Vector Math (Normalize)` 노드로 길이를 1로 정규화한다.
+
+**Step 3 — Gram-Schmidt 직교화**
+
+보간된 $T$와 $N$은 미세하게 90도를 벗어날 수 있다. 안정적인 디폼 매트릭스를 위해 세 벡터가 완벽한 직교를 이루도록 보정한다.
+
+1. `Vector Math (Cross Product)`: $B = N_{smooth} \times T_{smooth}$ — Normalize하여 **B (Bitangent)** 확정. (Houdini Handedness에 따라 $T \times N$ 순서로 조정.)
+2. `Vector Math (Cross Product)`: $T_{final} = B \times N_{smooth}$ — Normalize하여 N과 완벽히 90도를 이루는 **T** 재계산.
+3. **N**: $N_{smooth}$ 그대로 사용.
+
+이렇게 구한 T, B, N은 Katana/RenderMan 디포머가 내부적으로 구성하는 Local Transform Matrix와 수학적으로 동일한 기준축이다. TBN을 변환 행렬로 조립하는 방법은 [위의 Transformation Matrix 섹션](#transformation-matrix-between-local-frame-and-global-frame)을 참고한다.
 
 
 ### Tweak hair ( length )

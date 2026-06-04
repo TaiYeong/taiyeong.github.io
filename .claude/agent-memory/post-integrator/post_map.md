@@ -68,6 +68,20 @@ Backlink target for: any post touching Python patterns, Blender scripting, or pi
 
 ---
 
+### `2024-07-26-computerGraphics.md` — "Computer Graphics"
+Category: pipeline
+Topics: Math concepts (Deviation, Perpendicular/Orthogonal, Surface Normal, Frenet-Serret, TBN/Tangent Space, Vector ops, Vector projection, Transformation Matrix, Barycentric interpolation), Use Cases (GuideDeform in Houdini, Bilinear Interpolation for SKIN hair, Barycentric interpolation for GUIDE hair, Tweak hair)
+
+**New sections added 2026-06-03** (within `### TBN / Tangent Space` and `## Use Cases`):
+- `#### Naive TBN 계산의 한계 — 파이프라인 파손 원인 3가지` — inserted after `#### ③ TBN 프레임`. Covers why Face Normal vs. Smooth Normal, Edge Direction vs. UV Space (MikkTSpace), and Quad Non-Planar error break pipeline TBN matching vs. Katana/RenderMan.
+- `### Blender Geometry Nodes에서 정확한 TBN 추출 — skinprim / skinprimuv 기반` — inserted after `### Barycentric interpolation - for GUIDE type`. Covers: Quad vs. Triangle topology table for skinprimuv; Quad Trap warning + Divide SOP solution; 3-step GN node setup (Corners of Face + Sample Index → Barycentric weighting → Gram-Schmidt orthogonalization).
+
+Backlink added: `[Blender — Houdini skinprim / skinprimuv 데이터를 Geometry Nodes로 처리하기](/pipeline/2026-02-28-blender.html)` — within the new GN TBN section.
+
+Backlink target for: any post touching Blender groom/hair deformation, skinprim/skinprimuv, or Houdini↔Blender pipeline matching.
+
+---
+
 ## Topic clusters for backlink suggestions
 
 - **Claude Code / AI tooling**: ClaudeAI post is the primary target
