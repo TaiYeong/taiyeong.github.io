@@ -780,3 +780,356 @@
 .book:not(.color-theme-2) .highlight .sr {
   background-color: transparent !important;
 }
+
+/* --- Code block container border for white & sepia modes ---
+   Mirrors the dark-mode border (`.book.color-theme-2 div.highlighter-rouge`,
+   above) so fenced code blocks read as a defined container in every theme.
+   White mode uses a neutral grey hairline; sepia uses a warm tone matching
+   the heading/blockquote borders elsewhere in this file. */
+
+/* White / default mode */
+.book:not(.color-theme-1):not(.color-theme-2) div.highlighter-rouge {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden; /* keeps child background flush with rounded corners */
+}
+
+/* Sepia mode (color-theme-1) */
+.book.color-theme-1 div.highlighter-rouge {
+  position: relative;
+  border: 1px solid rgba(112, 66, 20, 0.18);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* ================================================================
+   CODE BLOCK READABILITY — WHITE AND SEPIA MODES — 2026-06-03
+   Root cause: colorful.css (the active Rouge theme) is a dark-
+   background scheme. Its unscoped base rule:
+     .highlight, .highlight .w { color: #bbbbbb; background-color: #000; }
+   forces code text to #bbbbbb (light grey) in white and sepia modes.
+   Contrast ratio: ~1.9:1 on white, ~2.0:1 on sepia — fails WCAG AA.
+   The 2026-06-03 block above already neutralised token backgrounds;
+   this block fixes the text colour and all key syntax token colours.
+   Scope: ALL new rules are scoped so they NEVER touch color-theme-2
+   (dark/night mode), whose token colours are set in the blocks above.
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   1. Base code-text colour — WHITE mode
+   colorful.css's #bbbbbb is overridden to near-black.
+   #24292f on #ffffff = 15.3:1 (WCAG AAA).
+   ---------------------------------------------------------------- */
+.book:not(.color-theme-1):not(.color-theme-2) .highlight,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .w {
+  color: #24292f !important;
+  background-color: transparent !important;
+}
+
+/* ----------------------------------------------------------------
+   2. Base code-text colour — SEPIA mode
+   #3d4042 on sepia page bg #f3eacb = ~10.5:1 (WCAG AAA).
+   ---------------------------------------------------------------- */
+.book.color-theme-1 .highlight,
+.book.color-theme-1 .highlight .w {
+  color: #3d4042 !important;
+  background-color: transparent !important;
+}
+
+/* ----------------------------------------------------------------
+   3. Code block container background — WHITE mode
+   Give blocks a subtle #f6f8fa fill so they float above prose.
+   ---------------------------------------------------------------- */
+.book:not(.color-theme-1):not(.color-theme-2) pre.highlight,
+.book:not(.color-theme-1):not(.color-theme-2) div.highlighter-rouge .highlight {
+  background-color: #f6f8fa !important;
+}
+
+/* ----------------------------------------------------------------
+   4. Code block container background — SEPIA mode
+   Reinforce website.css's #fdf6e3 in case the transparency reset
+   strips it.
+   ---------------------------------------------------------------- */
+.book.color-theme-1 pre.highlight,
+.book.color-theme-1 div.highlighter-rouge .highlight {
+  background-color: #fdf6e3 !important;
+}
+
+/* ----------------------------------------------------------------
+   5. Syntax token colours — WHITE mode
+   colorful.css comments use #888 → 3.5:1 on white (fails AA 4.5:1).
+   Strings have no explicit foreground so inherit the bad #bbbbbb.
+   ---------------------------------------------------------------- */
+
+/* Comments: #6a737d on #ffffff = 4.8:1 */
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .c,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .ch,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .cd,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .cm,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .cpf,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .c1,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .cs {
+  color: #6a737d !important;
+  background: none !important;
+  font-style: italic;
+}
+
+/* Strings (no colorful.css foreground → inherited #bbbbbb without fix):
+   #032f62 on #ffffff = 9.3:1 (GitHub light string blue) */
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .s,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sb,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .dl,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .s2,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sh,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .s1,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sa,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sc,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sd,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .se,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .si,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sr,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .ss,
+.book:not(.color-theme-1):not(.color-theme-2) .highlight .sx {
+  color: #032f62 !important;
+  background: none !important;
+}
+
+/* ----------------------------------------------------------------
+   6. Syntax token colours — SEPIA mode
+   All key tokens given warm-palette equivalents tuned for
+   #fdf6e3 code-block background.
+   ---------------------------------------------------------------- */
+
+/* Comments: muted olive-grey — 5.2:1 on #fdf6e3 */
+.book.color-theme-1 .highlight .c,
+.book.color-theme-1 .highlight .ch,
+.book.color-theme-1 .highlight .cd,
+.book.color-theme-1 .highlight .cm,
+.book.color-theme-1 .highlight .cpf,
+.book.color-theme-1 .highlight .c1,
+.book.color-theme-1 .highlight .cs {
+  color: #5c6b5e !important;
+  background: none !important;
+  font-style: italic;
+}
+
+/* Keywords: deep teal-green — 7.1:1 on #fdf6e3 */
+.book.color-theme-1 .highlight .k,
+.book.color-theme-1 .highlight .kc,
+.book.color-theme-1 .highlight .kd,
+.book.color-theme-1 .highlight .kn,
+.book.color-theme-1 .highlight .kr,
+.book.color-theme-1 .highlight .kp,
+.book.color-theme-1 .highlight .kv {
+  color: #005c5c !important;
+  font-weight: bold;
+  background: none !important;
+}
+
+/* Functions, builtins: deep navy-blue — 7.8:1 on #fdf6e3 */
+.book.color-theme-1 .highlight .nf,
+.book.color-theme-1 .highlight .fm,
+.book.color-theme-1 .highlight .nb,
+.book.color-theme-1 .highlight .bp {
+  color: #004c8c !important;
+  background: none !important;
+}
+
+/* Strings: warm burgundy — 6.4:1 on #fdf6e3 */
+.book.color-theme-1 .highlight .s,
+.book.color-theme-1 .highlight .sb,
+.book.color-theme-1 .highlight .dl,
+.book.color-theme-1 .highlight .s2,
+.book.color-theme-1 .highlight .sh,
+.book.color-theme-1 .highlight .s1,
+.book.color-theme-1 .highlight .sa,
+.book.color-theme-1 .highlight .sc,
+.book.color-theme-1 .highlight .sd,
+.book.color-theme-1 .highlight .se,
+.book.color-theme-1 .highlight .si,
+.book.color-theme-1 .highlight .sr,
+.book.color-theme-1 .highlight .ss,
+.book.color-theme-1 .highlight .sx {
+  color: #7a2c2c !important;
+  background: none !important;
+}
+
+/* Numbers: amber-brown — 5.8:1 on #fdf6e3 */
+.book.color-theme-1 .highlight .m,
+.book.color-theme-1 .highlight .mb,
+.book.color-theme-1 .highlight .mx,
+.book.color-theme-1 .highlight .mi,
+.book.color-theme-1 .highlight .il,
+.book.color-theme-1 .highlight .mf,
+.book.color-theme-1 .highlight .mh,
+.book.color-theme-1 .highlight .mo {
+  color: #7a3e00 !important;
+  background: none !important;
+}
+
+/* Operators: near-black — 14.7:1 on #fdf6e3 */
+.book.color-theme-1 .highlight .o,
+.book.color-theme-1 .highlight .ow {
+  color: #2a2a2a !important;
+  background: none !important;
+}
+
+/* ----------------------------------------------------------------
+   7. Language badges — WHITE mode
+   The existing badge rules are dark-mode only. Mirror them for
+   white mode with neutral grey tones.
+   ---------------------------------------------------------------- */
+.book:not(.color-theme-1):not(.color-theme-2) div.language-python.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-bash.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-sh.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-shell.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-zsh.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-powershell.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ps1.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-javascript.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-js.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-typescript.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ts.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-json.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-yaml.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-yml.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-cpp.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-c.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-cmake.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-dockerfile.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-docker.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ruby.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-html.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-css.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-scss.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-sql.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-xml.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-vex.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-lua.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-toml.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ini.highlighter-rouge::before,
+.book:not(.color-theme-1):not(.color-theme-2) div.language-diff.highlighter-rouge::before {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.67em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35em 0.9em 0.3em;
+  color: rgba(0, 0, 0, 0.38);
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  line-height: 1.8;
+}
+
+/* Badge text — white mode */
+.book:not(.color-theme-1):not(.color-theme-2) div.language-python.highlighter-rouge::before     { content: "Python"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-bash.highlighter-rouge::before       { content: "Bash"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-sh.highlighter-rouge::before         { content: "Shell"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-shell.highlighter-rouge::before      { content: "Shell"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-zsh.highlighter-rouge::before        { content: "Zsh"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-powershell.highlighter-rouge::before { content: "PowerShell"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ps1.highlighter-rouge::before        { content: "PowerShell"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-javascript.highlighter-rouge::before { content: "JavaScript"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-js.highlighter-rouge::before         { content: "JavaScript"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-typescript.highlighter-rouge::before { content: "TypeScript"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ts.highlighter-rouge::before         { content: "TypeScript"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-json.highlighter-rouge::before       { content: "JSON"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-yaml.highlighter-rouge::before       { content: "YAML"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-yml.highlighter-rouge::before        { content: "YAML"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-cpp.highlighter-rouge::before        { content: "C++"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-c.highlighter-rouge::before          { content: "C"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-cmake.highlighter-rouge::before      { content: "CMake"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-dockerfile.highlighter-rouge::before { content: "Dockerfile"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-docker.highlighter-rouge::before     { content: "Dockerfile"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ruby.highlighter-rouge::before       { content: "Ruby"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-html.highlighter-rouge::before       { content: "HTML"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-css.highlighter-rouge::before        { content: "CSS"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-scss.highlighter-rouge::before       { content: "SCSS"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-sql.highlighter-rouge::before        { content: "SQL"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-xml.highlighter-rouge::before        { content: "XML"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-vex.highlighter-rouge::before        { content: "VEX"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-lua.highlighter-rouge::before        { content: "Lua"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-toml.highlighter-rouge::before       { content: "TOML"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-ini.highlighter-rouge::before        { content: "INI"; }
+.book:not(.color-theme-1):not(.color-theme-2) div.language-diff.highlighter-rouge::before       { content: "Diff"; }
+
+/* ----------------------------------------------------------------
+   8. Language badges — SEPIA mode
+   Warm brown tones that harmonise with the sepia palette.
+   ---------------------------------------------------------------- */
+.book.color-theme-1 div.language-python.highlighter-rouge::before,
+.book.color-theme-1 div.language-bash.highlighter-rouge::before,
+.book.color-theme-1 div.language-sh.highlighter-rouge::before,
+.book.color-theme-1 div.language-shell.highlighter-rouge::before,
+.book.color-theme-1 div.language-zsh.highlighter-rouge::before,
+.book.color-theme-1 div.language-powershell.highlighter-rouge::before,
+.book.color-theme-1 div.language-ps1.highlighter-rouge::before,
+.book.color-theme-1 div.language-javascript.highlighter-rouge::before,
+.book.color-theme-1 div.language-js.highlighter-rouge::before,
+.book.color-theme-1 div.language-typescript.highlighter-rouge::before,
+.book.color-theme-1 div.language-ts.highlighter-rouge::before,
+.book.color-theme-1 div.language-json.highlighter-rouge::before,
+.book.color-theme-1 div.language-yaml.highlighter-rouge::before,
+.book.color-theme-1 div.language-yml.highlighter-rouge::before,
+.book.color-theme-1 div.language-cpp.highlighter-rouge::before,
+.book.color-theme-1 div.language-c.highlighter-rouge::before,
+.book.color-theme-1 div.language-cmake.highlighter-rouge::before,
+.book.color-theme-1 div.language-dockerfile.highlighter-rouge::before,
+.book.color-theme-1 div.language-docker.highlighter-rouge::before,
+.book.color-theme-1 div.language-ruby.highlighter-rouge::before,
+.book.color-theme-1 div.language-html.highlighter-rouge::before,
+.book.color-theme-1 div.language-css.highlighter-rouge::before,
+.book.color-theme-1 div.language-scss.highlighter-rouge::before,
+.book.color-theme-1 div.language-sql.highlighter-rouge::before,
+.book.color-theme-1 div.language-xml.highlighter-rouge::before,
+.book.color-theme-1 div.language-vex.highlighter-rouge::before,
+.book.color-theme-1 div.language-lua.highlighter-rouge::before,
+.book.color-theme-1 div.language-toml.highlighter-rouge::before,
+.book.color-theme-1 div.language-ini.highlighter-rouge::before,
+.book.color-theme-1 div.language-diff.highlighter-rouge::before {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.67em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35em 0.9em 0.3em;
+  color: rgba(112, 66, 20, 0.55);
+  background: rgba(112, 66, 20, 0.06);
+  border-bottom: 1px solid rgba(112, 66, 20, 0.13);
+  line-height: 1.8;
+}
+
+/* Badge text — sepia mode */
+.book.color-theme-1 div.language-python.highlighter-rouge::before     { content: "Python"; }
+.book.color-theme-1 div.language-bash.highlighter-rouge::before       { content: "Bash"; }
+.book.color-theme-1 div.language-sh.highlighter-rouge::before         { content: "Shell"; }
+.book.color-theme-1 div.language-shell.highlighter-rouge::before      { content: "Shell"; }
+.book.color-theme-1 div.language-zsh.highlighter-rouge::before        { content: "Zsh"; }
+.book.color-theme-1 div.language-powershell.highlighter-rouge::before { content: "PowerShell"; }
+.book.color-theme-1 div.language-ps1.highlighter-rouge::before        { content: "PowerShell"; }
+.book.color-theme-1 div.language-javascript.highlighter-rouge::before { content: "JavaScript"; }
+.book.color-theme-1 div.language-js.highlighter-rouge::before         { content: "JavaScript"; }
+.book.color-theme-1 div.language-typescript.highlighter-rouge::before { content: "TypeScript"; }
+.book.color-theme-1 div.language-ts.highlighter-rouge::before         { content: "TypeScript"; }
+.book.color-theme-1 div.language-json.highlighter-rouge::before       { content: "JSON"; }
+.book.color-theme-1 div.language-yaml.highlighter-rouge::before       { content: "YAML"; }
+.book.color-theme-1 div.language-yml.highlighter-rouge::before        { content: "YAML"; }
+.book.color-theme-1 div.language-cpp.highlighter-rouge::before        { content: "C++"; }
+.book.color-theme-1 div.language-c.highlighter-rouge::before          { content: "C"; }
+.book.color-theme-1 div.language-cmake.highlighter-rouge::before      { content: "CMake"; }
+.book.color-theme-1 div.language-dockerfile.highlighter-rouge::before { content: "Dockerfile"; }
+.book.color-theme-1 div.language-docker.highlighter-rouge::before     { content: "Dockerfile"; }
+.book.color-theme-1 div.language-ruby.highlighter-rouge::before       { content: "Ruby"; }
+.book.color-theme-1 div.language-html.highlighter-rouge::before       { content: "HTML"; }
+.book.color-theme-1 div.language-css.highlighter-rouge::before        { content: "CSS"; }
+.book.color-theme-1 div.language-scss.highlighter-rouge::before       { content: "SCSS"; }
+.book.color-theme-1 div.language-sql.highlighter-rouge::before        { content: "SQL"; }
+.book.color-theme-1 div.language-xml.highlighter-rouge::before        { content: "XML"; }
+.book.color-theme-1 div.language-vex.highlighter-rouge::before        { content: "VEX"; }
+.book.color-theme-1 div.language-lua.highlighter-rouge::before        { content: "Lua"; }
+.book.color-theme-1 div.language-toml.highlighter-rouge::before       { content: "TOML"; }
+.book.color-theme-1 div.language-ini.highlighter-rouge::before        { content: "INI"; }
+.book.color-theme-1 div.language-diff.highlighter-rouge::before       { content: "Diff"; }
