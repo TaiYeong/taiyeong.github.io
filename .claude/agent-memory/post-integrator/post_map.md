@@ -19,6 +19,10 @@ Topics: Claude AI Projects feature, Claude Code deep usage guide (Claude.md, Ski
 
 **Subagent/Skills additions** (within `##### 2. 사용자 정의 자동화`): Added 2026-05-30. Added to Subagents bullet: token cost explanation for orchestrator mode, reason agent auto-delegation fails (no Skills defined). Added to Skills NOTE block: session-based workflow capture prompt for auto-generating Skills + Commands.
 
+**Command/Skill/Subagent comparison table** (within `### 2. 사용자 정의 자동화 (Orchestration Workflow)`): Added 2026-06-06. Inserted immediately after the `>[!NOTE] Pattern: Command → Agent (with skill) → Skill` callout. Contains a 5-row comparison table (개념, AI 추론 사용, 컨텍스트 윈도우, 사용 목적, 비유) and a one-paragraph pattern-flow summary. Emphasizes the routing mechanism: Skill must define a workflow for Claude to delegate to Subagent; without it Claude self-completes.
+
+**세 개념 상세 설명 4개 서브섹션** (within `### 2. 사용자 정의 자동화`, immediately after pattern-flow paragraph): Added 2026-06-06. Four `####` subsections inserted before the bullet-point list. (1) `세 개념의 상세 정의` — per-concept definition, characteristics, examples, plus AI-개입/컨텍스트 관점 비교 테이블 and one-liner summaries. (2) `직관적 역할 매핑 및 실전 적용 가이드` — TD role mapping, three situational triggers (상황 A/B/C). (3) `실전 시나리오: Houdini to Blender 파이프라인 툴 개발` — 3-step scenario: Skill 정의 → Command 실행 → Agent 백그라운드 작업, using Groom Deform Tool / PySide MVC example. (4) `개념 조합 가이드` — standalone vs. combined Subagent+Skill usage, progressive adoption ladder (Command → Skill → Subagent).
+
 Backlink target for: any post touching Claude Code, MCP, or AI automation workflows.
 
 ---
